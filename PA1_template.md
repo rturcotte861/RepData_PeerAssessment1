@@ -1,14 +1,10 @@
----
-title: "Reproducible Research: Peer Assessment 1"
-output: 
-  html_document:
-    keep_md: true
----
+# Reproducible Research: Peer Assessment 1
 
 
 ## Loading and preprocessing the data
 1. Load the data
-```{r, echo=TRUE}
+
+```r
 data <- read.csv(unz("activity.zip", "activity.csv"), nrows=17568, header=T, sep=",", 
                  colClasses = c("numeric", "Date", "numeric"))
 ```
@@ -22,7 +18,8 @@ For this part of the assignment, the missing values in the dataset are ignored.
 
 1. Make a histogram of the total number of steps taken each day
 
-```{r, echo=TRUE, warning=FALSE, message=FALSE}
+
+```r
 library(dplyr)
 data_byDate <- group_by(data, date)
 dataSummary_byDate <- summarize(data_byDate, stepsum_byDate = sum(steps, na.rm = TRUE))
@@ -34,22 +31,35 @@ hist(dataSummary_byDate$stepsum_byDate,
      col = "red") # Histogram color
 ```
 
+![](PA1_template_files/figure-html/unnamed-chunk-2-1.png) 
+
 2. Calculate and report the mean and median total number of steps taken per day
 
 The mean number of steps taken per day is:
-```{r, echo=TRUE}
+
+```r
 mean(dataSummary_byDate$stepsum_byDate, na.rm = TRUE)
 ```
 
+```
+## [1] 9354.23
+```
+
 The median number of steps taken per day is:
-```{r, echo=TRUE}
+
+```r
 median(dataSummary_byDate$stepsum_byDate, na.rm = TRUE)
+```
+
+```
+## [1] 10395
 ```
 
 ## What is the average daily activity pattern?
 1. Make a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)
 
-```{r, echo=TRUE}
+
+```r
 data_byInterval <- group_by(data, interval)
 dataSummary_byInterval <- summarize(data_byInterval, stepmean_byInterval = mean(steps, na.rm = TRUE))
 plot(dataSummary_byInterval$interval, dataSummary_byInterval$stepmean_byInterval, # Data
@@ -62,10 +72,17 @@ plot(dataSummary_byInterval$interval, dataSummary_byInterval$stepmean_byInterval
 lines(dataSummary_byInterval$interval, dataSummary_byInterval$stepmean_byInterval, type="l")
 ```
 
+![](PA1_template_files/figure-html/unnamed-chunk-5-1.png) 
+
 2. Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
 The 5-minutes interval containing the maximum number of steps is interval:
-```{r, echo=TRUE}
+
+```r
 dataSummary_byInterval$interval[which.max(dataSummary_byInterval$stepmean_byInterval)]
+```
+
+```
+## [1] 835
 ```
 
 ## Imputing missing values
@@ -73,8 +90,13 @@ Note that there are a number of days/intervals where there are missing values (c
 calculations or summaries of the data.
 1. Calculate and report the total number of missing values in the dataset
 (i.e. the total number of rows with NAs)
-```{r, echo=TRUE}
+
+```r
 sum( !is.na(data$steps) ) 
+```
+
+```
+## [1] 15264
 ```
 2. Devise a strategy for filling in all of the missing values in the dataset. The strategy does not need to be sophisticated. For example, you could use the mean/median for that day, or the mean for that 5-minute interval, etc.
 3. Create a new dataset that is equal to the original dataset but with the missing data filled in.
