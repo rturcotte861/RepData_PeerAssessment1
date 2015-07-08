@@ -159,7 +159,8 @@ The mean and median values with missing values replaced differ from the first pa
 - The mean is no longer skewed to lower value compared to the median, i.e. the mean and median are equivalent.
 
 ## Are there differences in activity patterns between weekdays and weekends?
-For this part the weekdays() function may be of some help here. Use the dataset with the filled-in missing values for this part.
+For this part, the weekdays() function and the dataset with the filled-in missing values will be used.
+
 1. Create a new factor variable in the dataset with two levels – “weekday” and “weekend” indicating whether a given date is a weekday or weekend day.
 
 ```r

@@ -191,7 +191,10 @@ hist(dataSummary_byDate_noNA$stepsum_byDate_noNA,
 </div>
 <div id="are-there-differences-in-activity-patterns-between-weekdays-and-weekends" class="section level2">
 <h2>Are there differences in activity patterns between weekdays and weekends?</h2>
-<p>For this part the weekdays() function may be of some help here. Use the dataset with the filled-in missing values for this part. 1. Create a new factor variable in the dataset with two levels – “weekday” and “weekend” indicating whether a given date is a weekday or weekend day.</p>
+<p>For this part, the weekdays() function and the dataset with the filled-in missing values will be used.</p>
+<ol style="list-style-type: decimal">
+<li>Create a new factor variable in the dataset with two levels – “weekday” and “weekend” indicating whether a given date is a weekday or weekend day.</li>
+</ol>
 <pre class="r"><code>library(lubridate)
 daytypeFunc &lt;- function(date) {
     if (weekdays(as.Date(date)) %in% c(&quot;Saturday&quot;, &quot;Sunday&quot;)) {
